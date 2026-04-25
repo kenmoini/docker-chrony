@@ -1,0 +1,18 @@
+FROM quay.io/fedora/fedora:43
+
+RUN dnf update -y \
+  && dnf install chronyd -y \
+  && dnf clean all \
+  && rm -rf /var/cache/dnf/*
+
+COPY chrony.conf /etc/chrony.conf
+
+EXPOSE 123/udp 4460/tcp
+
+COPY entrypoint.sh /
+
+RUN chronyd --version
+
+HEALTHCHECK --interval=60s --timeout=5s CMD chronyc tracking > /dev/null
+
+ENTRYPOINT ["/entrypoint.sh"]

@@ -2,7 +2,7 @@ name: Build Container Image
 
 env:
   BUILD_CONTEXT_PATH: .
-  CONTAINERFILE_PATH: Dockerfile
+  CONTAINERFILE_PATH: Dockerfile.fedora
   WORKFLOW_TRIGGER: 1
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
