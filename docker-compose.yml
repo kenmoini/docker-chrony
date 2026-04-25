@@ -1,8 +1,10 @@
-version: '3.6'
+
 services:
   chrony:
-    build: .
-    image: publicarray/chrony
+    build:
+      context: .
+      dockerfile: Dockerfile.fedora
+    image: ghcr.io/kenmoini/docker-chrony:latest
     deploy:
       replicas: 1
       resources:

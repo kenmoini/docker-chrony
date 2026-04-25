@@ -1,25 +1,26 @@
-This image is designed to be used as part of the [www.pool.ntp.org](https://ntppool.org) project.
-Default is for the Australian zone
+# Chronyd, in a Contaihner
+
+> Self explanitory
 
 ```sh
 # Build
-docker build -t publicarray/chrony .
+docker build -t kenmoini/chrony .
 # Run
-docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME publicarray/chrony
+docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME kenmoini/chrony
 # Using the host's rtc (realtime clock) [untested]
-docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME -v /dev/rtc:/dev/rtc:ro publicarray/chrony
+docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME -v /dev/rtc:/dev/rtc:ro kenmoini/chrony
 # BYO (bring your own) config file
-docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME -v "$(pwd)"/chrony.conf:/etc/chrony.conf:ro publicarray/chrony
+docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME -v "$(pwd)"/chrony.conf:/etc/chrony.conf:ro kenmoini/chrony
 # Run with arguments
-docker run -it --rm --name chrony -p123:123/udp publicarray/chrony -- --help
+docker run -it --rm --name chrony -p123:123/udp kenmoini/chrony -- --help
 # Specify NTP servers to use as a time source
-docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME publicarray/chrony -s time.apple.com -s time.windows.com -s time.cloudflare.com
+docker run -it --rm --name chrony -p123:123/udp --cap-add SYS_TIME kenmoini/chrony -s time.apple.com -s time.windows.com -s time.cloudflare.com
 # Always restart / always online service and limit logfile size
-docker run -d --restart always --name chrony -p123:123/udp --cap-add SYS_TIME --log-opt max-size=1m --log-opt max-file=3 publicarray/chrony
+docker run -d --restart always --name chrony -p123:123/udp --cap-add SYS_TIME --log-opt max-size=1m --log-opt max-file=3 kenmoini/chrony
 
 # Save state and use host network
 docker volume create chrony
-docker run -d --restart always --name chrony --network host -v chrony:/var/lib/chrony --cap-add SYS_TIME publicarray/chrony
+docker run -d --restart always --name chrony --network host -v chrony:/var/lib/chrony --cap-add SYS_TIME kenmoini/chrony
 ```
 
 ```sh
