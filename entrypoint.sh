@@ -52,8 +52,8 @@ if [ $# -eq 0 ]; then
 # -s = Set the system clock from the computer’s real-time clock (RTC)
 #      or to the last modification time of the file specified by
 #      the driftfile directiv
-    exec /usr/local/sbin/chronyd -d -F 1 -s
+    exec /usr/local/chronyd -d -F 1 -s
 fi
 
 [ "$1" = '--' ] && shift
-exec /usr/local/sbin/chronyd "$@"
+exec /usr/local/chronyd "$@"
