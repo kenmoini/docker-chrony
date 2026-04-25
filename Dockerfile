@@ -1,7 +1,7 @@
 FROM debian:latest
-LABEL maintainer "publicarray"
+LABEL maintainer "Ken Moini"
 LABEL description "chrony is a versatile implementation of the Network Time Protocol (NTP)"
-LABEL org.opencontainers.image.source https://github.com/publicarray/docker-chrony
+LABEL org.opencontainers.image.source https://github.com/kenmoini/docker-chrony
 ENV REVISION 2
 
 ENV CHRONY_BUILD_DEPS make pkg-config tar wget gcc libcap-dev libseccomp-dev libedit-dev nettle-dev libgnutls28-dev libtomcrypt-dev
@@ -32,9 +32,10 @@ RUN set -x && \
 
 #------------------------------------------------------------------------------#
 FROM debian:latest
-LABEL org.opencontainers.image.source https://github.com/publicarray/docker-chrony
+LABEL maintainer "Ken Moini"
+LABEL org.opencontainers.image.source https://github.com/kenmoini/docker-chrony
 
-ENV CHRONY_RUN_DEPS libcap2 libseccomp2 libedit2 tzdata libnettle6 libgnutls30 libtomcrypt1
+ENV CHRONY_RUN_DEPS libcap2 libseccomp2 libedit2 tzdata libnettle7 libgnutls30 libtomcrypt1 chronyd
 
 RUN apt-get update \
     && apt-get install -y $CHRONY_RUN_DEPS \
